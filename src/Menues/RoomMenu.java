@@ -1,28 +1,28 @@
 package Menues;
 
+import Rooms.Rooms;
+
 import java.util.Scanner;
 
 public class RoomMenu {
-    public RoomMenu(){
-
+    public RoomMenu(Rooms rooms) {
         boolean loop = true;
 
-        while(loop){
-            System.out.println("\n\tRoom Menu:");
-            System.out.println("1. Get in first room");
-            System.out.println("2. Get in second room");
-            System.out.println("3. Get in third room");
-            System.out.println("4. Back");
-            System.out.print("Enter choice:");
+        while (loop) {
+            System.out.println("\n\tКоридор:");
+            System.out.println("1. Увійти в першу кімнату");
+            System.out.println("2. Увійти в другу кімнату");
+            System.out.println("3. Увійти в третю кімнату");
+            System.out.println("4. Назад");
+            System.out.print("Введіть вибір:");
             Scanner scan = new Scanner(System.in);
             int choice = scan.nextInt();
 
             switch (choice) {
-                case 1 -> System.out.println("Room 1 menu is under maintenance");
-                case 2 -> System.out.println("Room 2 menu is under maintenance");
-                case 3 -> System.out.println("Room 3 menu is under maintenance");
+                case 1 -> new CertainMenu(0, rooms);
+                case 2 -> new CertainMenu(1, rooms);
+                case 3 -> new CertainMenu(2, rooms);
                 case 4 -> loop = false;
-                default -> System.out.println("Invalid choice. Please enter a valid option.");
             }
         }
     }

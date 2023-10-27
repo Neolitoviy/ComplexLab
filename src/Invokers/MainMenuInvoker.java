@@ -1,27 +1,23 @@
 package Invokers;
 
-import Interfaces.Command;
+import Rooms.Rooms;
+import Interfaces.RoomsCommand;
 
 public class MainMenuInvoker {
-    Command roomsMenu;
-    Command buildingMenu;
-    Command exit;
+    RoomsCommand roomsMenu;
+    RoomsCommand buildingMenu;
 
-    public MainMenuInvoker(Command roomsMenu, Command buildingMenu, Command exit) {
+    public MainMenuInvoker(RoomsCommand roomsMenu, RoomsCommand buildingMenu) {
         this.roomsMenu = roomsMenu;
         this.buildingMenu = buildingMenu;
-        this.exit = exit;
     }
 
-    public void callRoomMenu(){
-        roomsMenu.execute();
+    public void callRoomMenu(Rooms rooms){
+        roomsMenu.execute(rooms);
     }
 
-    public void callBuildingMenu(){
-        buildingMenu.execute();
+    public void callBuildingMenu(Rooms rooms){
+        buildingMenu.execute(rooms);
     }
 
-    public void callExit(){
-        exit.execute();
-    }
 }

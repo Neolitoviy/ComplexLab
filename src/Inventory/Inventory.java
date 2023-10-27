@@ -1,14 +1,20 @@
 package Inventory;
 
 public abstract class Inventory {
-    protected Description desc;
+    Description desc;
+    private String group;
 
-    public Inventory(Description desc) {
-        this.desc = desc;
-    }
-
-    public Description getDesc() {
+    public Description getDesc(){
         return this.desc;
     }
-
+    public String getSize(){return desc.getSize();}
+    public String getName() {return desc.getToyName();}
+    public String getGroup(){
+        return group;
+    }
+    public int getPrice(){return desc.getPrice();}
+    public int getNumber(){return desc.getNumber();}
+    public void setGroup(String group) {
+        this.group = group;
+    }
 }

@@ -1,15 +1,15 @@
 package Inventory;
 
 public class Description {
-    private String ToyName;
     private String size;
+    private String ToyName;
     private int price;
     private int id;
-    private int number;
+    private final int number;
 
-    public Description(String size, String ToyName, int price, int id, int number) {
+    public Description(String size, String nameToy, int price,int id,int number) {
         this.size = size;
-        this.ToyName = ToyName;
+        this.ToyName = nameToy;
         this.price = price;
         this.id = id;
         this.number = number;
@@ -35,8 +35,8 @@ public class Description {
         return ToyName;
     }
 
-    public void setToyName(String toyName) {
-        this.ToyName = toyName;
+    public void setToyName(String rename) {
+        this.ToyName = rename;
     }
 
     public int getPrice() {
@@ -47,22 +47,21 @@ public class Description {
         this.price = price;
     }
 
+    public Description getDesc(){
+        return this;
+    }
+
     public int getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
     @Override
     public String toString() {
-        return "Description{" +
-                "ToyName='" + ToyName +
-                ", Id=" + id +
-                ", Price=" + price +
-                ", Size='" + size +
-                ", Number=" + number +
-                '}';
+        return  "\n\tОпис: " +
+                "\n\tРозмір = " + size +
+                "\n\tНазва іграшки = " + ToyName +
+                "\n\tЦіна = " + price +
+                "\n\tID = " + id +
+                "\n\tКількість = " + number;
     }
 }

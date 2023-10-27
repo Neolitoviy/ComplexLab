@@ -1,5 +1,7 @@
 package Menues;
 
+import Rooms.Rooms;
+import Interfaces.RoomCommand;
 import Invokers.SortAndSearchInvoker;
 import Reciever.CallerSearch;
 import Reciever.CallerSort;
@@ -7,28 +9,27 @@ import Reciever.CallerSort;
 import java.util.Scanner;
 
 public class RoomsMenu {
-    public RoomsMenu(){
-        CallerSearch search = new CallerSearch();
-        CallerSort sort = new CallerSort();
-        SortAndSearchInvoker inv = new SortAndSearchInvoker(sort,search);
+    public RoomsMenu(Rooms rooms) {
+        RoomCommand search = new CallerSearch();
+        RoomCommand sort = new CallerSort();
+        SortAndSearchInvoker inv = new SortAndSearchInvoker(sort, search);
         boolean loop = true;
 
-        while(loop){
-            System.out.println("\n\tRooms Menu:");
-            System.out.println("1. List all inventory");
-            System.out.println("2. Search");
-            System.out.println("3. Sort");
-            System.out.println("4. Back");
+        while (loop) {
+            System.out.println("\n\tМеню всіх кімнат:");
+            System.out.println("1. Перелік всього інвентарю");
+            System.out.println("2. Пошук");
+            System.out.println("3. Сортування");
+            System.out.println("4. Назад");
 
-            System.out.print("Enter choice:");
+            System.out.print("Введіть вибір:");
             Scanner scan = new Scanner(System.in);
             int choice = scan.nextInt();
 
             switch (choice) {
-                case 1 -> { // TODO: 09.10.2023  ;
-                }
-                case 2 -> inv.callSearchMenu();
-                case 3 -> inv.callSortMenu();
+                case 1 -> rooms.showAllInventory();
+                case 2 -> inv.callSearchMenu(rooms, -1);
+                case 3 -> inv.callSortMenu(rooms, -1);
                 case 4 -> loop = false;
             }
         }

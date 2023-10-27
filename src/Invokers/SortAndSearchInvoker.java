@@ -1,21 +1,22 @@
 package Invokers;
 
-import Interfaces.Command;
+import Rooms.Rooms;
+import Interfaces.RoomCommand;
 
 public class SortAndSearchInvoker {
-    Command sortMenu;
-    Command searchMenu;
+    RoomCommand sortMenu;
+    RoomCommand searchMenu;
 
-    public SortAndSearchInvoker(Command sortMenu, Command searchMenu) {
+    public SortAndSearchInvoker(RoomCommand sortMenu, RoomCommand searchMenu) {
         this.sortMenu = sortMenu;
         this.searchMenu = searchMenu;
     }
 
-    public void callSortMenu(){
-        sortMenu.execute();
+    public void callSortMenu(Rooms rooms, int numberRoom){
+        sortMenu.execute(rooms,numberRoom);
     }
 
-    public void callSearchMenu(){
-        searchMenu.execute();
+    public void callSearchMenu(Rooms rooms, int numberRoom){
+        searchMenu.execute(rooms,numberRoom);
     }
 }

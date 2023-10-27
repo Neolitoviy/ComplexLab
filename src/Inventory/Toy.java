@@ -3,9 +3,10 @@ package Inventory;
 public class Toy extends Inventory {
     private final String brand;
 
-    public Toy(String size, String name, int price, int id, String brand, int number) {
-        super(new Description(size, name, price, id, number)); // Виклик конструктора батьківського класу Inventory
+    public Toy(String size, String name, int price, int number, String brand, int id) {
+        desc = new Description(size, name, price, id, number);
         this.brand = brand;
+        setGroup("Toy");
     }
 
     public String getBrand() {
@@ -14,9 +15,10 @@ public class Toy extends Inventory {
 
     @Override
     public String toString() {
-        return "Toy{" +
-                "Brand='" + brand +
-                ", Description=" + getDesc() +
-                '}';
+        return  "\nІграшка :" +
+                "\nБренд = " + brand
+                + desc;
     }
+
+
 }
