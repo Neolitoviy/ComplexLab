@@ -1,8 +1,13 @@
 package Rooms;
 
-import Inventory.Inventory;
+import Factories.DeviceFactory;
+import Factories.SportFactory;
+import Factories.ToyFactory;
 import Interfaces.InventoryFactory;
-import Factories.*;
+import Inventory.Device;
+import Inventory.Inventory;
+import Inventory.Sport;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,36 +15,36 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+
 public class Rooms {
     private final String nameOfBuilding;
-    private final ArrayList<Playroom> rooms;
-    private final int maxBudget;
-    private final int maxNumberToys;
-    private int curBudget;
-    private int curNumberToys;
-    private final ArrayList<Inventory> fullInvent;
+    private ArrayList<Playroom> rooms;
+    private Accounting accounting;
+    private ArrayList<Inventory> fullInvent;
 
-    public Rooms() {
+    public Rooms(Connection conn){
+        accounting = new Accounting();
         nameOfBuilding = "Іграшковий дім";
-        fullInvent = new ArrayList<>();
-        rooms = new ArrayList<>(3);
-        maxBudget = 20000;
-        maxNumberToys = 60;
-        curBudget = maxBudget;
-        curNumberToys = 0;
-        for (int i = 0; i < 3; i++) {
-            String name = "Кімната-" + (i + 1);
-            rooms.add(new Playroom(name, i + 1, maxNumberToys / 3));
+        fullInvent = new ArrayList<Inventory>();
+        rooms = new ArrayList <>(3);
+        for(int i = 0;i < 3;i++){
+            String name = "Кімната - " + (i+1);
+            rooms.add(new Playroom(name,i+1,accounting.getMaxNumberToys() / 3,conn,this));
         }
     }
 
-    public void fillRooms(Connection conn) throws SQLException {
+    public Accounting getAccounting() {
+        return accounting;
+    }
+
+    public boolean fillRooms(Connection conn) throws SQLException {
         for (int i = 0; i < rooms.size(); i++) {
             buyInventoryFromSSMSTable(conn, "dbo.SportRoom", (i + 1), new SportFactory(), 3);
-            buyInventoryFromSSMSTable(conn, "dbo.DeviceRoom", (i + 1), new DeviceFactory(), 4);
+            buyInventoryFromSSMSTable(conn, "dbo.DeviceRoom", (i + 1), new DeviceFactory(), 3);
             buyInventoryFromSSMSTable(conn, "dbo.ToysRoom", (i + 1), new ToyFactory(), 3);
         }
         fillFullInvent();
+        return true;
     }
 
     private void buyInventoryFromSSMSTable(Connection conn, String tableName, int index, InventoryFactory factory, int priceColumnIndex) throws SQLException {
@@ -48,60 +53,69 @@ public class Rooms {
         ResultSet rs = stat.executeQuery(query);
 
         while (rs.next()) {
-            if (curBudget - rs.getInt(priceColumnIndex) < 0 || curNumberToys == maxNumberToys) {
+            if (((accounting.getCurBudget() - rs.getInt(3)) < 0) ||  (accounting.getCurNumberToys() == accounting.getMaxNumberToys())) {
                 System.out.println("Неможливо купити - " + rs.getString(2) + " ID:" + rs.getInt(6));
             } else {
                 rooms.get(index).buyInventory(factory.createInventory(rs));
-                curBudget -= rs.getInt(priceColumnIndex);
-                curNumberToys += 1;
+                accounting.reduceBudget(rs.getInt(3));
+                accounting.addNewToy();
             }
         }
     }
 
-    public void showAllInventory() {
-        for (Inventory invent : fullInvent) {
+    public void showAllInventory(){
+        for(Inventory invent : fullInvent){
             System.out.println(invent);
         }
     }
 
-    public void showInventoryInRoom(int numberRoom) {
+    public void showInventoryInRoom(int numberRoom){
         rooms.get(numberRoom).showInventory();
     }
 
-    public void searchByGroup(String group) {
+    public boolean searchByGroup(String group){
+        boolean founded = false;
         for (Playroom room : rooms) {
-            room.searchByGroup(group);
+            if(room.searchByGroup(group))
+                founded = true;
         }
+        return founded;
     }
 
-    public void searchBySize(String size) {
+    public boolean searchBySize(String size){
+        boolean founded = false;
         for (Playroom room : rooms) {
-            room.searchBySize(size);
+            if(room.searchBySize(size))
+                founded = true;
         }
+        return founded;
     }
 
-    public void searchByName(String name) {
+    public boolean searchByName(String name){
+        boolean founded = false;
         for (Playroom room : rooms) {
-            room.searchByName(name);
+            if(room.searchByName(name))
+                founded = true;
         }
+        return founded;
     }
 
-    public void sortBySize() {
+    public void sortBySize(){
         fullInvent.sort(Comparator.comparing(Inventory::getSize));
         showAllInventory();
     }
 
-    public void sortByPrice() {
+    public void sortByPrice(){
         fullInvent.sort(Comparator.comparing(Inventory::getPrice));
         showAllInventory();
     }
 
-    public void sortByGroup() {
+    public void sortByGroup(){
         fullInvent.sort(Comparator.comparing(Inventory::getGroup));
         showAllInventory();
     }
 
-    public void sortByNumber() {
+    public void sortByNumber(){
         fullInvent.sort(Comparator.comparing(Inventory::getNumber));
         showAllInventory();
     }
@@ -110,14 +124,30 @@ public class Rooms {
         return rooms;
     }
 
-    public void budgetInfo() {
-        System.out.println("\n\tМаксимальний бюджет \"" + nameOfBuilding + "\" - " + maxBudget + "$");
-        System.out.println("\tПоточний бюджет - " + curBudget + "$\n");
+    public void budgetInfo(){
+        System.out.println(accounting);
     }
 
-    void fillFullInvent() {
+    void fillFullInvent(){
         for (Playroom room : rooms) {
             fullInvent.addAll(room.invent);
         }
     }
+
+    public void fillRoomsTest(){
+        rooms.get(1).buyInventory(new Device("large","laptop",777,100,2,25616,3));
+        rooms.get(0).buyInventory(new Sport("medium","ball machine",500,"football","new",15124,1));
+        rooms.get(1).buyInventory(new Device("small","tablet",100,50,2,25612,1));
+    }
+
+    public void fillInventTest(){
+        fullInvent.add(new Device("large","laptop",777,100,2,25616,3));
+        fullInvent.add(new Sport("medium","ball machine",500,"football","new",15124,1));
+        fullInvent.add(new Device("small","tablet",100,50,2,25612,1));
+    }
+
+    public ArrayList<Inventory> getFullInvent() {
+        return fullInvent;
+    }
 }
+

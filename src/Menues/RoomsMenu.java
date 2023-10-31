@@ -9,13 +9,13 @@ import Reciever.CallerSort;
 import java.util.Scanner;
 
 public class RoomsMenu {
-    public RoomsMenu(Rooms rooms) {
+    public RoomsMenu(Rooms rooms){
         RoomCommand search = new CallerSearch();
         RoomCommand sort = new CallerSort();
-        SortAndSearchInvoker inv = new SortAndSearchInvoker(sort, search);
+        SortAndSearchInvoker inv = new SortAndSearchInvoker(sort,search);
         boolean loop = true;
 
-        while (loop) {
+        while(loop){
             System.out.println("\n\tМеню всіх кімнат:");
             System.out.println("1. Перелік всього інвентарю");
             System.out.println("2. Пошук");

@@ -2,10 +2,10 @@ package Inventory;
 
 public class Description {
     private String size;
-    private String ToyName;
-    private int price;
-    private int id;
-    private final int number;
+    private final String ToyName;
+    private final int price;
+    private final int id;
+    private  int number;
 
     public Description(String size, String nameToy, int price,int id,int number) {
         this.size = size;
@@ -15,13 +15,6 @@ public class Description {
         this.number = number;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getSize() {
         return size;
@@ -35,20 +28,13 @@ public class Description {
         return ToyName;
     }
 
-    public void setToyName(String rename) {
-        this.ToyName = rename;
-    }
 
     public int getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public Description getDesc(){
-        return this;
+    public int getId() {
+        return id;
     }
 
     public int getNumber() {
@@ -63,5 +49,9 @@ public class Description {
                 "\n\tЦіна = " + price +
                 "\n\tID = " + id +
                 "\n\tКількість = " + number;
+    }
+
+    public void incNumber(){
+        number++;
     }
 }

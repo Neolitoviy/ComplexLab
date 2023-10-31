@@ -1,0 +1,12 @@
+Date: Tue Oct 31 23:18:40 EET 2023
+INFO: Connected to SSMS successfully
+
+Date: Tue Oct 31 23:18:40 EET 2023
+INFO: Mail Session set
+
+Date: Tue Oct 31 23:18:41 EET 2023
+INFO: Rooms filled by inventory
+
+Date: Tue Oct 31 23:19:03 EET 2023
+INFO: Program finished
+

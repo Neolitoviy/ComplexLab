@@ -5,10 +5,10 @@ import Rooms.Rooms;
 import java.util.Scanner;
 
 public class RoomMenu {
-    public RoomMenu(Rooms rooms) {
+    public RoomMenu(Rooms rooms){
         boolean loop = true;
 
-        while (loop) {
+        while(loop){
             System.out.println("\n\tКоридор:");
             System.out.println("1. Увійти в першу кімнату");
             System.out.println("2. Увійти в другу кімнату");

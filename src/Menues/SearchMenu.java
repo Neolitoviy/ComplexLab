@@ -21,13 +21,13 @@ public class SearchMenu {
                 handleUserChoiceInRoom(choice, rooms, numberRoom);
             }
 
+            if (choice == 4)
+                loop = false;
+
             if (choice == 5) {
                 System.out.println("\n\tДо зустрічі!");
                 System.exit(0);
             }
-
-            if (choice == 4)
-                loop = false;
         }
     }
 
