@@ -6,9 +6,17 @@ import org.junit.Test;
 
 import java.sql.SQLException;
 
+/**
+ * Клас містить тести для перевірки підключення до SQL Server.
+ */
 public class SSMSTest {
+    /**
+     * Тест на успішне підключення до SQL Server.
+     *
+     * @throws SQLException виникає, коли виникають проблеми з підключенням до бази даних SQL Server.
+     */
     @Test
-    public void TestSSMSConnection() throws SQLException {
+    public void testSSMSConnection() throws SQLException {
         SSMS connection = new SSMS();
         Assert.assertNotNull(connection);
     }

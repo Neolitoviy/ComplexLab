@@ -4,10 +4,25 @@ package Inventory;
 
 import java.util.Scanner;
 
+/**
+ * Клас `Sport` представляє інвентар у формі спортивного обладнання та містить інформацію про кожний об'єкт.
+ * Цей клас розширює властивості базового класу `Inventory`.
+ */
 public class Sport extends Inventory {
-    private String sportName;
-    private String quality;
+    private final String sportName;
+    private final String quality;
 
+    /**
+     * Конструктор класу `Sport`, який ініціалізує інформацію про спортивний інвентар.
+     *
+     * @param size      Розмір інвентарю.
+     * @param name      Назва інвентарю.
+     * @param price     Ціна інвентарю.
+     * @param sportName Назва виду спорту.
+     * @param quality   Якість інвентарю.
+     * @param id        Унікальний ідентифікатор інвентарю.
+     * @param number    Кількість інвентарю.
+     */
     public Sport(String size, String name, int price, String sportName, String quality, int id, int number) {
         desc = new Description(size, name, price, id, number);
         this.sportName = sportName;
@@ -15,7 +30,9 @@ public class Sport extends Inventory {
         setGroup("Sport");
     }
 
-
+    /**
+     * Конструктор класу `Sport` без параметрів, який дозволяє введення даних про спортивний інвентар з консолі.
+     */
     public Sport() {
         setGroup("Sport");
         String size, nameToy;
@@ -38,6 +55,11 @@ public class Sport extends Inventory {
         desc = new Description(size, nameToy, price, id, 1);
     }
 
+    /**
+     * Повертає рядкове представлення об'єкту `Sport`, включаючи інформацію про спортивний інвентар та його опис.
+     *
+     * @return Рядкове представлення об'єкту `Sport`.
+     */
     @Override
     public String toString() {
         return
@@ -47,10 +69,20 @@ public class Sport extends Inventory {
                         + desc;
     }
 
+    /**
+     * Повертає назву виду спорту спортивного інвентарю.
+     *
+     * @return Назва виду спорту.
+     */
     public String getSportName() {
         return sportName;
     }
 
+    /**
+     * Повертає якість спортивного інвентарю.
+     *
+     * @return Якість інвентарю.
+     */
     public String getQuality() {
         return quality;
     }

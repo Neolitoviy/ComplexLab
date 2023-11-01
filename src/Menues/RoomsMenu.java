@@ -8,14 +8,34 @@ import Reciever.CallerSort;
 
 import java.util.Scanner;
 
+/**
+ * Клас, що представляє меню всіх кімнат.
+ */
 public class RoomsMenu {
-    public RoomsMenu(Rooms rooms){
-        RoomCommand search = new CallerSearch();
-        RoomCommand sort = new CallerSort();
-        SortAndSearchInvoker inv = new SortAndSearchInvoker(sort,search);
+    /**
+     * Об'єкт для виклику команди пошуку.
+     */
+    private RoomCommand search = new CallerSearch();
+
+    /**
+     * Об'єкт для виклику команди сортування.
+     */
+    private RoomCommand sort = new CallerSort();
+
+    /**
+     * Об'єкт для виклику команд пошуку та сортування.
+     */
+    private SortAndSearchInvoker inv = new SortAndSearchInvoker(sort, search);
+
+    /**
+     * Конструктор класу RoomsMenu.
+     *
+     * @param rooms Об'єкт класу Rooms, який містить інформацію про кімнати та інвентар.
+     */
+    public RoomsMenu(Rooms rooms) {
         boolean loop = true;
 
-        while(loop){
+        while (loop) {
             System.out.println("\n\tМеню всіх кімнат:");
             System.out.println("1. Перелік всього інвентарю");
             System.out.println("2. Пошук");

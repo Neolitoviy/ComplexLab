@@ -11,10 +11,16 @@ import org.junit.Test;
 
 import java.sql.SQLException;
 
+/**
+ * Цей клас містить набір тестів для перевірки функціональності пошуку і сортування в класі Playroom.
+ */
 public class SearchTest {
     SSMS connection;
     Rooms rooms;
 
+    /**
+     * Тест для перевірки функції пошуку за групою інвентаря в ігровій кімнаті.
+     */
     @Test
     public void TestSearchByGroup(){
         MyLogger log = new MyLogger();
@@ -34,6 +40,9 @@ public class SearchTest {
         Assert.assertFalse(room.searchByGroup("Device"));
     }
 
+    /**
+     * Тест для перевірки функції пошуку за розміром інвентаря в ігровій кімнаті.
+     */
     @Test
     public void TestSearchBySize(){
         MyLogger log = new MyLogger();
@@ -51,6 +60,9 @@ public class SearchTest {
         Assert.assertFalse(room.searchBySize("big"));
     }
 
+    /**
+     * Тест для перевірки функції пошуку за назвою інвентаря в ігровій кімнаті.
+     */
     @Test
     public void TestSearchByName(){
         MyLogger log = new MyLogger();

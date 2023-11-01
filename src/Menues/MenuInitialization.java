@@ -3,18 +3,26 @@ package Menues;
 import Rooms.Rooms;
 import Invokers.MainMenuInvoker;
 import Logger.MyLogger;
-import Reciever.CallerBuildMenu;
 import Reciever.CallerRoomsMenu;
+import Reciever.CallerRoomMenu;
 
 import java.util.Scanner;
 
+/**
+ * Клас для ініціалізації головного меню програми.
+ */
 public class MenuInitialization {
+    /**
+     * Конструктор класу MenuInitialization.
+     *
+     * @param rooms Об'єкт класу Rooms, який містить інформацію про кімнати та інвентар.
+     */
     public MenuInitialization(Rooms rooms) {
-        CallerBuildMenu buildMenu = new CallerBuildMenu();
-        CallerRoomsMenu roomMenu = new CallerRoomsMenu();
-        MainMenuInvoker invoker = new MainMenuInvoker(roomMenu,buildMenu);
+        CallerRoomsMenu buildMenu = new CallerRoomsMenu();
+        CallerRoomMenu roomMenu = new CallerRoomMenu();
+        MainMenuInvoker invoker = new MainMenuInvoker(roomMenu, buildMenu);
 
-        while(true) {
+        while (true) {
             System.out.println("\t\t\t\tМеню:");
             System.out.println("1. Робота з усіма кімнатами");
             System.out.println("2. Робота з певною кімнатою");
@@ -31,7 +39,7 @@ public class MenuInitialization {
                 case 3 -> rooms.budgetInfo();
                 default -> {
                     System.out.println("\n\tДо зустрічі!");
-                    MyLogger.getLogger().info("Program finished");
+                    MyLogger.getLogger().info("Програма завершила роботу");
                     System.exit(0);
                 }
             }

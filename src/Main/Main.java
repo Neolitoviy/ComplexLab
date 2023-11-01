@@ -4,31 +4,35 @@ import Rooms.Rooms;
 import Logger.MyLogger;
 import Menues.MenuInitialization;
 import SSMS_Connection.SSMS;
-import EmailSender.EmailSender;
-
-
-import javax.mail.MessagingException;
-import java.io.IOException;
 import java.sql.SQLException;
 
-
+/**
+ * Головний клас програми.
+ */
 public class Main {
-    public static void main(String[] args) throws SQLException, IOException, MessagingException {
+    /**
+     * Точка входу в програму.
+     *
+     * @param args Параметри командного рядка.
+     * @throws SQLException Помилка SQL.
+     */
+    public static void main(String[] args) throws SQLException {
         MyLogger logger = new MyLogger();
         SSMS connection = new SSMS();
         Rooms rooms = new Rooms(connection.getConn());
 
         try {
             rooms.fillRooms(connection.getConn());
-            MyLogger.getLogger().info("Rooms filled by inventory");
+            MyLogger.getLogger().info("Кімнати заповнені інвертарем");
         }
         catch (SQLException e){
-            MyLogger.getLogger().severe("Error filling rooms");
+            MyLogger.getLogger().severe("Помилка заповнення кімнат");
         }
 
         new MenuInitialization(rooms);
     }
 }
+
 
 
 

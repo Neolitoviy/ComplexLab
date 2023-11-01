@@ -1,12 +1,12 @@
-Date: Tue Oct 31 23:18:40 EET 2023
-INFO: Connected to SSMS successfully
+Date: Wed Nov 01 02:45:02 EET 2023
+INFO: Підключено до SSMS успішно
 
-Date: Tue Oct 31 23:18:40 EET 2023
-INFO: Mail Session set
+Date: Wed Nov 01 02:45:02 EET 2023
+INFO: Успішно ініціалізовано поштову сесію
 
-Date: Tue Oct 31 23:18:41 EET 2023
-INFO: Rooms filled by inventory
+Date: Wed Nov 01 02:45:04 EET 2023
+INFO: Кімнати заповнені інвертарем
 
-Date: Tue Oct 31 23:19:03 EET 2023
-INFO: Program finished
+Date: Wed Nov 01 02:45:07 EET 2023
+INFO: Програма завершила роботу
 

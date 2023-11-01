@@ -9,11 +9,16 @@ import org.junit.Test;
 
 import java.sql.SQLException;
 
+/**
+ * Цей клас містить набір тестів для перевірки сортування інвентаря в ігровій кімнаті.
+ */
 public class SortTest {
-
     SSMS connection;
     Rooms rooms;
 
+    /**
+     * Тест для перевірки сортування інвентаря за розміром в ігровій кімнаті.
+     */
     @Test
     public void TestSortBySize(){
         try {
@@ -34,6 +39,9 @@ public class SortTest {
         }
     }
 
+    /**
+     * Тест для перевірки сортування інвентаря за ціною в ігровій кімнаті.
+     */
     @Test
     public void TestSortByPrice(){
         try {
@@ -53,6 +61,9 @@ public class SortTest {
         }
     }
 
+    /**
+     * Тест для перевірки сортування інвентаря за групою в ігровій кімнаті.
+     */
     @Test
     public void TestSortByGroup(){
         try {
@@ -73,6 +84,9 @@ public class SortTest {
         }
     }
 
+    /**
+     * Тест для перевірки сортування інвентаря за кількістю в ігровій кімнаті.
+     */
     @Test
     public void TestSortByNumber(){
         try {

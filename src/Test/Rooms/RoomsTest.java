@@ -9,13 +9,24 @@ import org.junit.Test;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * Цей клас містить набір тестів для перевірки функціональності класу Rooms.
+ */
 public class RoomsTest {
-
-
+    /**
+     * Конструктор для ініціалізації логгера.
+     *
+     * @throws IOException Виникає у разі помилок вводу/виводу.
+     */
     public RoomsTest() throws IOException {
         MyLogger log = new MyLogger();
     }
 
+    /**
+     * Тест для перевірки заповнення кімнат інвентарем.
+     *
+     * @throws SQLException Виникає у разі помилок взаємодії з базою даних.
+     */
     @Test
     public void TestFillingRooms() throws SQLException {
         SSMS connection;
@@ -29,6 +40,11 @@ public class RoomsTest {
         Assert.assertTrue(rooms.fillRooms(connection.getConn()));
     }
 
+    /**
+     * Тест для перевірки функції пошуку інвентаря за назвою, групою та розміром.
+     *
+     * @throws SQLException Виникає у разі помилок взаємодії з базою даних.
+     */
     @Test
     public void TestSearching() throws SQLException {
         SSMS connection;
@@ -45,6 +61,11 @@ public class RoomsTest {
         Assert.assertTrue(rooms.searchBySize("MEDIUM"));
     }
 
+    /**
+     * Тест для перевірки сортування інвентаря за групою.
+     *
+     * @throws SQLException Виникає у разі помилок взаємодії з базою даних.
+     */
     @Test
     public void TestSortingByGroup() throws SQLException {
         SSMS connection;
@@ -63,6 +84,11 @@ public class RoomsTest {
         }
     }
 
+    /**
+     * Тест для перевірки сортування інвентаря за ціною.
+     *
+     * @throws SQLException Виникає у разі помилок взаємодії з базою даних.
+     */
     @Test
     public void TestSortingByPrice() throws SQLException {
         SSMS connection;
@@ -80,7 +106,11 @@ public class RoomsTest {
         }
     }
 
-
+    /**
+     * Тест для перевірки сортування інвентаря за розміром.
+     *
+     * @throws SQLException Виникає у разі помилок взаємодії з базою даних.
+     */
     @Test
     public void TestSortingBySize() throws SQLException {
         SSMS connection;
@@ -99,6 +129,11 @@ public class RoomsTest {
         }
     }
 
+    /**
+     * Тест для перевірки сортування інвентаря за номером.
+     *
+     * @throws SQLException Виникає у разі помилок взаємодії з базою даних.
+     */
     @Test
     public void TestSortingByNumber() throws SQLException {
         SSMS connection;
@@ -116,6 +151,9 @@ public class RoomsTest {
         }
     }
 
+    /**
+     * Тест для перевірки отримання списку кімнат.
+     */
     @Test
     public void TestGettingRooms(){
         SSMS connection;

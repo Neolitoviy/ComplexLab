@@ -12,7 +12,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * Цей клас містить тест для перевірки додавання інвентаря до кімнати.
+ */
 public class TestAddingInventory {
+    /**
+     * Метод тестує додавання інвентаря до кімнати.
+     *
+     * @throws SQLException Виникає у разі помилок взаємодії з базою даних.
+     * @throws IOException  Виникає у разі помилок вводу/виводу.
+     */
     @Test
     public void TestAddExistingToy() throws SQLException, IOException {
         MyLogger log = new MyLogger();
